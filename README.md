@@ -1,5 +1,9 @@
 ![Banner do Projeto](led_casa_home.png)
 
+![Linguagem](https://img.shields.io/badge/linguagem-python-blue)
+![Placa](https://img.shields.io/badge/ESP32-compatível-orange)
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+
 # led_quarto_ia
 Controle de LED com IA em Pytho
 
