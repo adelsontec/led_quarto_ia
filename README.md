@@ -1,58 +1,103 @@
-![Banner do Projeto](led_casa_home.png)
 
-![Linguagem](https://img.shields.io/badge/linguagem-python-blue)
-![Placa](https://img.shields.io/badge/ESP32-compatível-orange)
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+# Controle de Luz com Inteligência Artificial e ESP32
 
-# led_quarto_ia
-Controle de LED com IA em Pytho
-
-# Controle de LED do Quarto com IA e ESP32
-
-Este projeto permite controlar um LED via comandos de texto com uma IA simples em Python. Os comandos são enviados para um **ESP32 via Wi-Fi**, que acende ou apaga o LED de verdade.
+Este projeto implementa um sistema de automação residencial usando **reconhecimento de voz com IA leve**, controle físico via **ESP32** e **resposta por voz**, além de registro de comandos em log. Com ele, você pode **falar comandos como "acender a luz" ou "apagar a luz"**, e o sistema interpretará, responderá e executará o comando fisicamente via LED conectado ao ESP32.
 
 ---
 
-## Funcionalidades
+## 🔧 Componentes do Projeto
 
-- IA simples interpreta comandos em linguagem natural (ex: "ligar a luz", "está escuro")
-- Envio de comandos via rede para um ESP32
-- Controle real de LED (pino 2 do ESP32)
-- Compatível com rede Wi-Fi local
-
----
-
-## Arquivos do projeto
-
-- `main.py`: script em Python com interpretação de linguagem natural e envio de comandos
-- `esp32_led_wifi.ino`: código Arduino que roda no ESP32 e controla o LED via socket TCP
+- ESP32 com LED conectado (pino 2)
+- Python 3 (em ambiente Linux ou virtualenv)
+- Microfone para entrada de áudio
+- Wi-Fi (ESP32 e computador na mesma rede)
 
 ---
 
-## Como usar
+## 🧠 Funcionalidades
 
-### No ESP32
-1. Suba o código `esp32_led_wifi.ino` usando a **Arduino IDE**
-2. Altere o nome e a senha da sua rede Wi-Fi no código
-3. Abra o monitor serial e anote o IP do ESP32
-
-### No Python (pelo PC ou celular com Pydroid)
-1. Instale Python e a biblioteca `socket` (já vem por padrão)
-2. Rode o `main.py`
-3. Digite comandos como `ligar a luz` ou `desligar o quarto`
-4. O ESP32 executa o comando e responde
+- 🎙️ Reconhecimento de voz com `speech_recognition`
+- 🧠 Interpretação de comandos com IA simples (linguagem natural)
+- 🌐 Comunicação HTTP com ESP32 (`/ligar`, `/desligar`)
+- 💡 Controle de LED em tempo real
+- 🗣️ Resposta falada com `pyttsx3`
+- 📝 Registro de comandos em log `.csv` com data e hora
 
 ---
 
-## Futuras melhorias
+## 📂 Estrutura do Projeto
 
-- Reconhecimento de voz
-- Interface gráfica ou app Android
-- Controle por Telegram ou Alexa
-- Sensor de luz para controle automático
+```
+📁 projeto/
+├── led_ia_voz_fala.py          # Script principal com tudo integrado
+├── comandos_log.csv            # Arquivo gerado com histórico de comandos
+├── controle_led_webserver.ino  # Código para o ESP32 (Arduino IDE)
+```
 
 ---
 
-## Licença
+## 🚀 Como usar
 
-Este projeto é livre para fins educacionais. Feito com propósito de aprendizado e experimentação em IoT e Inteligência Artificial.
+### 1. Prepare o ESP32
+
+1. Suba o código `controle_led_webserver.ino` pela Arduino IDE
+2. Verifique o IP no monitor serial (ex: `192.168.100.166`)
+
+### 2. Configure o Python (no PC)
+
+```bash
+sudo apt install python3-venv portaudio19-dev
+python3 -m venv led-ia-env
+source led-ia-env/bin/activate
+pip install requests pyttsx3 SpeechRecognition pyaudio
+```
+
+### 3. Rode o script com IA e voz
+
+```bash
+python led_ia_voz_fala.py
+```
+
+---
+
+## 🗣️ Comandos suportados
+
+- "ligar a luz", "acender", "ligar"
+- "desligar a luz", "apagar", "desligar"
+
+---
+
+## 📋 Log de comandos
+
+O sistema salva automaticamente todos os comandos em `comandos_log.csv`, com a estrutura:
+
+```
+Data/Hora, Comando reconhecido, Ação enviada
+2025-04-14 14:36, acenda a luz, ligar
+2025-04-14 14:37, apagar tudo, desligar
+```
+
+---
+
+## 🧩 Tecnologias utilizadas
+
+- Python 3
+- ESP32 (Arduino IDE)
+- Bibliotecas: `speech_recognition`, `pyttsx3`, `requests`, `pyaudio`
+- HTML interno (ESP32 WebServer)
+
+---
+
+## 🧠 Possíveis melhorias
+
+- Interface gráfica com botão de voz
+- Integração com Google Assistant ou Telegram
+- Controle de múltiplos dispositivos (ventilador, TV etc)
+- Reconhecimento de voz offline (com Vosk ou Whisper)
+
+---
+
+## 📄 Licença
+
+Este projeto é livre para uso educacional e pessoal.
+Criado por [Seu Nome], 2025.
