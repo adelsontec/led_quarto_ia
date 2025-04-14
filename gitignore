@@ -1,0 +1,13 @@
+
+# Arquivos de cache e temporários
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+*.csv
+
+# Ambientes virtuais
+venv/
+.env/
+led-ia-env/
