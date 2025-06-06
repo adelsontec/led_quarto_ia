@@ -17,10 +17,12 @@ def enviar_comando_para_esp32(comando):
 
 def interpretar_comando(texto):
     texto = texto.lower()
-    if "ligar" in texto or "acender" in texto:
-        return "ligar"
-    elif "desligar" in texto or "apagar" in texto:
+    # A palavra "ligar" está contida em "desligar". Para evitar erro,
+    # checamos "desligar" antes de procurar por "ligar" ou "acender".
+    if "desligar" in texto or "apagar" in texto:
         return "desligar"
+    elif "ligar" in texto or "acender" in texto:
+        return "ligar"
     else:
         return "comando_desconhecido"
 
